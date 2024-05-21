@@ -50,6 +50,7 @@ public class SelectLanguageTest extends TestBase {
                 )
         );
     }
+    
 @ValueSource(strings = {
         "Москва", "Нижневартовск", "Мурманск"
 })
