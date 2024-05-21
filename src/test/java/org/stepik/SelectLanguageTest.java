@@ -22,30 +22,30 @@ public class SelectLanguageTest extends TestBase {
     @EnumSource(Language.class)
     @ParameterizedTest(name = "Для языка {0} должен измениться заголовок")
     @DisplayName("После выбора языка изменяется заголовок")
-    void siteShouldDisplayCorrectTitleTest(Language language) {
+    void сheckTitleChangeLanguageTest(Language language) {
         $(".Link__Content").click();
-        $$(".DropdownSelect__Item").find(text(language.name())).click();
-        $(".H1Title__H1").shouldHave(text(language.description));
+        $$(".DropdownSelect__Item").find(text(language.language)).click();
+        $(".H1Title__H1").shouldHave(text(language.title));
     }
 
-    @MethodSource
+    @MethodSource("buttons")
     @ParameterizedTest(name = "Для языка {0} должны отображаться кнопки на соответствующем языке")
     @DisplayName("После выбора языка изменяются названия кнопок")
-    void siteShouldDisplayCorrectButtons(Language language, List<String> expectedButtons) {
+    void сheckCorrectButtonsChangeLanguageTest(Language language, List<String> expectedButtons) {
         $(".Link__Content").click();
-        $$(".DropdownSelect__Item").find(text(language.name())).click();
+        $$(".DropdownSelect__Item").find(text(language.language)).click();
         $$(".Nav__Item").filter(visible)
                 .shouldHave(texts(expectedButtons));
     }
 
-    static Stream<Arguments> siteShouldDisplayCorrectButtons() {
+    static Stream<Arguments> buttons() {
         return Stream.of(
                 Arguments.of(
-                        Language.English,
+                        Language.EN,
                         List.of("Flights", "Rail tickets", "Charters", "Hotels")
                 ),
                 Arguments.of(
-                        Language.Русский,
+                        Language.RU,
                         List.of("Авиабилеты", "Ж/Д билеты", "Чартеры", "Отели", "Онлайн-путешествия")
                 )
         );
@@ -55,7 +55,7 @@ public class SelectLanguageTest extends TestBase {
 })
 @ParameterizedTest(name = "Город {0} должен быть выбран в поле \"Город отправления\"")
 @DisplayName("В поле \"Город отправления\" можно ввести несколько значений")
-    void cityShouldBeSelectInCityFrom(String searchQuery) {
+    void сheckAddCitiesTest(String searchQuery) {
         $("[fieldname = 'from']").setValue(searchQuery);
         $(".AviaAirportInput__Suggestion__Value").
                 $(byText(searchQuery)).click();

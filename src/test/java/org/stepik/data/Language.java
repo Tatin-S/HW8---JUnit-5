@@ -1,12 +1,14 @@
 package org.stepik.data;
 
 public enum Language {
-    Русский("Поиск дешевых авиабилетов онлайн!"),
-    English("Find your flight");
+    RU("Русский","Поиск дешевых авиабилетов онлайн!"),
+    EN("English","Find your flight");
 
-    public final String description;
+    public final String language;
+    public final String title;
 
-    Language(String description) {
-        this.description = description;
+    Language(String language, String title) {
+        this.language = language;
+        this.title = title;
     }
 }
